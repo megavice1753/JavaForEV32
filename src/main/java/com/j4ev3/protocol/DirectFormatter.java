@@ -30,12 +30,12 @@ public final class DirectFormatter extends BasicByteCodeFormatter {
     }
     
     public void setGlobal(int g) {
-        if (global > 1024) throw new IllegalArgumentException("Global buffer must be less than 1024 bytes");
+        if (g >= 1024 || g < 0) throw new IllegalArgumentException("Global buffer must be less than 1024 bytes");
         global = (short)g;
     }
     
     public void setLocal(int l) {
-        if (local > 64) throw new IllegalArgumentException("Local buffer must be less than 64 bytes");
+        if (l >= 64 || l < 0) throw new IllegalArgumentException("Local buffer must be less than 64 bytes");
         local = (byte)l;
     }
     

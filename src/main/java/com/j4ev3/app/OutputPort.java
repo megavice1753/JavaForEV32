@@ -10,9 +10,15 @@ public abstract class OutputPort extends WorkingPort {
     }
     
     public static byte convertPort(byte port) {
-        return (byte)(0x01 << (port & 0x03));
+        return (byte)(0x01 << port & 0x03);
     }
     
+    /**
+     * 
+     * @param layer
+     * @param ports value 0b0101 equals active ports A & C at the same time
+     * @throws IOException 
+     */
     private static void checkParams(int layer, int ports) throws IOException {
         if (layer < 0 || layer > 3) {
             throw new IOException("Unrecognized layer value: " + layer + " must be between 0 and 3");
