@@ -33,7 +33,7 @@ public abstract class WorkingPort extends Port {
         df.LC0(0); //Specify device type (0 = Don’t change type)
         df.LC0(mode); //Device mode [0-7] (-1 = Don’t change mode)
         df.LC0(nvalue); //Number of return values
-        df.addGlobalIndex((byte)0x00);//need to change device type and select mode type
+        df.GV1((byte)0x00);//need to change device type and select mode type
         byte[] req = df.toByteArray();
         brick.getCommunicator().write(req, 0);
         byte[] reply = brick.getCommunicator().read(0,0);

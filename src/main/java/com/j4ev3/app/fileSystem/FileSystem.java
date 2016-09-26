@@ -107,7 +107,7 @@ public class FileSystem {
         if (bytecode[6] != SystemCommand.SUCCESS && bytecode[6] != SystemCommand.END_OF_FILE) {
             throw new IOException("Could not begin upload file: " + bytecode[6]);
         }
-        int totalSize = ((bytecode[10] & 0xFF) << 24) + ((bytecode[9] & 0xFF) << 16) + ((bytecode[8] & 0xFF) << 8) + (bytecode[7] & 0xFF);
+        int totalSize = (bytecode[10] << 24) + (bytecode[9] << 16) + (bytecode[8] << 8) + (bytecode[7]);
         byte handler = bytecode[11];
         byte[] bfile = new byte[totalSize];
         int sizeRead = bytecode.length - 12;
@@ -157,7 +157,7 @@ public class FileSystem {
         if (data[6] != SystemCommand.SUCCESS && data[6] != SystemCommand.END_OF_FILE) {
             throw new IOException("Could not begin fileList read: " + data[6]);
         }
-        int totalSize = ((data[10] & 0xFF) << 24) + ((data[9] & 0xFF) << 16) + ((data[8] & 0xFF) << 8) + (data[7] & 0xFF);
+        int totalSize = (data[10] << 24) + (data[9] << 16) + (data[8] << 8) + (data[7]);
         byte handler = data[11];
         byte[] bstring = new byte[totalSize];
         int sizeRead = Math.min(chunk, totalSize);

@@ -3,7 +3,6 @@ package com.j4ev3.protocol;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.nio.ByteBuffer;
 
 public abstract class BasicByteCodeFormatter {
     //see bytecodes.h
@@ -69,26 +68,26 @@ public abstract class BasicByteCodeFormatter {
     public abstract byte[] toByteArray() throws IOException;
 
     public void LC0(int v) throws IOException {
-        mWriter.writeByte((v & PRIMPAR_VALUE) | PRIMPAR_SHORT | PRIMPAR_CONST);
+        mWriter.writeByte(v & PRIMPAR_VALUE | PRIMPAR_SHORT | PRIMPAR_CONST);
     }
 
     public void LC1(int v) throws IOException {
         mWriter.writeByte(PRIMPAR_LONG  | PRIMPAR_CONST | PRIMPAR_1_BYTE);
-        mWriter.writeByte(v & 0xFF);
+        mWriter.writeByte(v);
     }
 
     public void LC2(int v) throws IOException {
         mWriter.writeByte(PRIMPAR_LONG  | PRIMPAR_CONST | PRIMPAR_2_BYTES);
-        mWriter.writeByte(v & 0xFF);
-        mWriter.writeByte((v >> 8) & 0xFF);
+        mWriter.writeByte(v);
+        mWriter.writeByte(v >> 8);
     }
 
     public void LC4(int v) throws IOException {
         mWriter.writeByte(PRIMPAR_LONG  | PRIMPAR_CONST | PRIMPAR_4_BYTES);
-        mWriter.writeByte(v & 0xFF);
-        mWriter.writeByte((v >> 8) & 0xFF);
-        mWriter.writeByte((v >> 16) & 0xFF);
-        mWriter.writeByte((v >> 24) & 0xFF);
+        mWriter.writeByte(v);
+        mWriter.writeByte(v >> 8);
+        mWriter.writeByte(v >> 16);
+        mWriter.writeByte(v >> 24);
     }
 
     public void addString(String str) throws IOException {
@@ -102,43 +101,38 @@ public abstract class BasicByteCodeFormatter {
     }
 
     public void GV0(int i) throws IOException {
-        mWriter.writeByte(((i & PRIMPAR_INDEX) | PRIMPAR_SHORT | PRIMPAR_VARIABEL | PRIMPAR_GLOBAL));
+        mWriter.writeByte(i & PRIMPAR_INDEX | PRIMPAR_SHORT | PRIMPAR_VARIABEL | PRIMPAR_GLOBAL);
     }
 
     public void GV1(int i) throws IOException {
         mWriter.writeByte(PRIMPAR_LONG  | PRIMPAR_VARIABEL | PRIMPAR_GLOBAL | PRIMPAR_1_BYTE);
-        mWriter.writeByte(i & 0xFF);
+        mWriter.writeByte(i);
     }
 
     public void GV2(int i) throws IOException {
         mWriter.writeByte(PRIMPAR_LONG  | PRIMPAR_VARIABEL | PRIMPAR_GLOBAL | PRIMPAR_2_BYTES);
-        mWriter.writeByte(i & 0xFF);
-        mWriter.writeByte((i >> 8) & 0xFF);
+        mWriter.writeByte(i);
+        mWriter.writeByte(i >> 8);
     }
 
     public void GV4(int i) throws IOException {
         mWriter.writeByte(PRIMPAR_LONG  | PRIMPAR_VARIABEL | PRIMPAR_GLOBAL | PRIMPAR_4_BYTES);
-        mWriter.writeByte(i & 0xFF);
-        mWriter.writeByte((i >> 8) & 0xFF);
-        mWriter.writeByte((i >> 16) & 0xFF);
-        mWriter.writeByte((i >> 24) & 0xFF);
-    }
-
-    public void addGlobalIndex(byte index) throws IOException {
-        mWriter.writeByte(0xE1);
-        mWriter.writeByte(index);
+        mWriter.writeByte(i);
+        mWriter.writeByte(i >> 8);
+        mWriter.writeByte(i >> 16);
+        mWriter.writeByte(i >> 24);
     }
     
     public void addSize(int x) throws IOException {
         mWriter.writeByte(x);
-        mWriter.writeByte(x >>> 8);
-        mWriter.writeByte(x >>> 16);
-        mWriter.writeByte(x >>> 24);
+        mWriter.writeByte(x >> 8);
+        mWriter.writeByte(x >> 16);
+        mWriter.writeByte(x >> 24);
     }
     
     public void addSize(short x) throws IOException {
         mWriter.writeByte(x);
-        mWriter.writeByte(x >>> 8);
+        mWriter.writeByte(x >> 8);
     }
     
     public void addBytes(byte[] data, int offset, int length) throws IOException {
