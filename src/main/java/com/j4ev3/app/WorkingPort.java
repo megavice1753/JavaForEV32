@@ -15,7 +15,7 @@ public abstract class WorkingPort extends Port {
     /**
      *
      * @param mode : -1 Don’t change mode, otherwise according documentation
-     * @return
+     * @return value from sensor with change his mode
      * @throws IOException
      */
     public float readValue(int mode) throws IOException {
@@ -43,5 +43,14 @@ public abstract class WorkingPort extends Port {
                 result[i] = ByteBuffer.wrap(data).order(ByteOrder.LITTLE_ENDIAN).getFloat();
         }
         return result[0];
+    }
+    
+    /**
+     *
+     * @return value from sensor without change his mode
+     * @throws IOException
+     */
+    public float readValue() throws IOException {
+        return readValue(-1);
     }
 }

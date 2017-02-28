@@ -52,6 +52,10 @@ public class PortFactory {
                     port = new EV3_IR(mas[5], mas[6], (byte)prt, (byte)layer, br);
                     break;
                 }
+                case EV3_GYRO: {
+                    port = new EV3_Gyro(mas[5], mas[6], (byte)prt, (byte)layer, br);
+                    break;
+                }
                 case ERROR_PORT: {
                     port = new Error(mas[5], mas[6], (byte)prt, (byte)layer, br);
                     break;

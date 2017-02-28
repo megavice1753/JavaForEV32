@@ -48,9 +48,13 @@ public abstract class BasicByteCodeFormatter {
     public static final byte EV3_COLOR_COLOR = 0x02;
 
     public static final byte EV3_IR = 0x21;
-    public static final byte EV3_PROXIMITY = 0x00;
-    public static final byte EV3_SEEKER = 0x01;
-    public static final byte EV3_REMOTE = 0x02;
+    public static final byte EV3_IR_PROXIMITY = 0x00;
+    public static final byte EV3_IR_SEEKER = 0x01;
+    public static final byte EV3_IR_REMOTE = 0x02;
+    
+    public static final byte EV3_GYRO = 0x20;
+    public static final byte EV3_GYRO_ANG = 0x00;
+    public static final byte EV3_GYRO_RATE = 0x01;
 
     protected final ByteArrayOutputStream mStream;
     protected final DataOutputStream mWriter;
