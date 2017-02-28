@@ -7,6 +7,6 @@ public class EV3_Gyro extends InputPort {
     
     @Override
     public String getName() {
-        return "EV3_Color";
+        return "EV3_Gyro";
     }
 }
